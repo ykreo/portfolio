@@ -17,7 +17,6 @@
 		text-align: center;
 		background-color: rgba(255, 255, 255, 0.03);
 		border-top: 1px solid rgba(255, 255, 255, 0.1);
-		margin-top: 4rem;
 	}
 	.container {
 		max-width: 1200px;

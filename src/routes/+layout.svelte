@@ -12,7 +12,6 @@
 	import { fade } from 'svelte/transition';
 	import { isCursorVisible } from '$lib/stores/cursor';
 	import { isLoading } from '$lib/stores/loader';
-	
 
 	let { children } = $props();
 	let scrollY = $state(0);
@@ -26,7 +25,6 @@
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		return () => window.removeEventListener('scroll', handleScroll);
 	});
-
 	$effect(() => {
 		if ($page.url.pathname !== '/') {
 			activeSection.set(null);
@@ -56,23 +54,34 @@
 <Header {isScrolled} />
 <FloatingControls />
 
+<div class="site-wrapper">
+	<main>
+		{#key $page.url.pathname}
+			<div
+				class="page-transition"
+				in:fade={{ duration: 250, delay: 250 }}
+				out:fade={{ duration: 250 }}
+			>
+				{@render children()}
+			</div>
+		{/key}
+	</main>
 
-<main>
-	{#key $page.url.pathname}
-		<div class="page-transition" in:fade={{ duration: 250, delay: 250 }} out:fade={{ duration: 250 }}>
-			{@render children()}
-		</div>
-	{/key}
-</main>
-
-<Footer />
+	<Footer />
+</div>
 
 <style>
+	.site-wrapper {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
 
 	main {
 		display: grid;
 		grid-template-columns: 1fr;
 		position: relative;
+		flex-grow: 1;
 	}
 
 	main > :global(.page-transition) {

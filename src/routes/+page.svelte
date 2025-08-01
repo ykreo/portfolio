@@ -9,7 +9,7 @@
 </script>
 
 <main>
-		<Hero />
+	<Hero />
 	<section id="careerpath" class="page-section" use:scrollSpy>
 		<CareerPath />
 	</section>
@@ -34,6 +34,5 @@
 <style>
 	.page-section {
 		padding: 6rem 0;
-		min-height: 100vh;
 	}
 </style>
