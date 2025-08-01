@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="1000" height="1000"><g clip-path="url(#SvgjsClipPath1140)"><rect width="1000" height="1000" fill="#fedb3c"></rect><g transform="matrix(5,0,0,5,100,100)"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="160" height="160"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fedb3c;
+      }
+
+      .cls-2 {
+        font-family: Unbounded-Black, Unbounded;
+        font-size: 113.16px;
+        font-variation-settings: 'wght' 900;
+        font-weight: 800;
+        letter-spacing: -.03em;
+      }
+    </style>
+  <clipPath id="SvgjsClipPath1140"><rect width="1000" height="1000" x="0" y="0" rx="500" ry="500"></rect></clipPath></defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-1" width="160" height="160"></rect>
+  </g>
+  <g id="Layer_1" data-name="Layer 1">
+    <text class="cls-2" transform="translate(24.29 123.02)"><tspan x="0" y="0">Y</tspan></text>
+  </g>
+</svg></svg></g></g></svg>

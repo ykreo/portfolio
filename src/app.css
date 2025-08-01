@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+@layer base {
+	/* Определяем наши переменные для всей страницы */
+	:root {
+		--color-background: #111111;
+		--color-text: #eaeaea;
+		--color-accent: #fde047;
+
+		--font-sans: 'Manrope';
+		--font-display: 'Unbounded';
+	}
+
+	/* Применяем базовые стили к body */
+	body {
+		background-color: var(--color-background);
+		color: var(--color-text);
+		font-family: var(--font-sans), sans-serif;
+	}
+
+	/* Применяем дизайнерский шрифт к заголовкам */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: var(--font-display), sans-serif;
+	}
+}
+@layer base {
+	/* Добавляем глобальный стиль для состояния фокуса.
+    :focus-visible срабатывает только при навигации с клавиатуры (Tab),
+    не мешая пользователям мыши.
+  */
+	:is(a, button):focus-visible {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+}
