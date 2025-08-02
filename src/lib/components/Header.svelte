@@ -18,6 +18,16 @@
 	const closeMenu = () => {
 		isMobileMenuOpen = false;
 	};
+
+	// --- НОВЫЙ КОД: Список ссылок для меню ---
+	const navLinks = [
+		{ href: '/#careerpath', label: m.career_path_title, id: 'careerpath' },
+		{ href: '/#keyprojects', label: m.key_projects_title, id: 'keyprojects' },
+		{ href: '/#myarsenal', label: m.arsenal_title, id: 'myarsenal' },
+		{ href: '/#about', label: m.menu_about, id: 'about' },
+		{ href: '/#contacts', label: m.menu_contacts, id: 'contacts' }
+	];
+	// --- КОНЕЦ НОВОГО КОДА ---
 </script>
 
 <header class:header-scrolled={isScrolled}>
@@ -25,12 +35,11 @@
 		<a href="/" class="logo font-display" onclick={closeMenu}>YKREO</a>
 
 		<nav class="desktop-nav">
-			<a href="/#about" data-cursor-hover class:active={$activeSection === 'about'}>
-				{m.menu_about()}
-			</a>
-			<a href="/#contacts" data-cursor-hover class:active={$activeSection === 'contacts'}>
-				{m.menu_contacts()}
-			</a>
+			{#each navLinks as link}
+				<a href={link.href} data-cursor-hover class:active={$activeSection === link.id}>
+					{link.label()}
+				</a>
+			{/each}
 			<a
 				href="/works"
 				class="portfolio-button"
@@ -39,7 +48,7 @@
 			>
 				{m.menu_portfolio()}
 			</a>
-			</nav>
+		</nav>
 
 		<button
 			class="mobile-menu-toggle"
@@ -58,10 +67,11 @@
 {#if isMobileMenuOpen}
 	<div class="mobile-nav-wrapper" transition:fly={{ duration: 400, x: '100%', easing: quintOut }}>
 		<nav class="mobile-nav">
-			<a href="/#about" onclick={closeMenu}>{m.menu_about()}</a>
-			<a href="/#contacts" onclick={closeMenu}>{m.menu_contacts()}</a>
+			{#each navLinks as link}
+				<a href={link.href} onclick={closeMenu}>{link.label()}</a>
+			{/each}
 			<a href="/works" onclick={closeMenu}>{m.menu_portfolio()}</a>
-			</nav>
+		</nav>
 	</div>
 {/if}
 
@@ -107,7 +117,9 @@
 	.desktop-nav a {
 		text-decoration: none;
 		color: var(--color-text);
-		transition: color 0.2s ease, background-color 0.2s ease;
+		transition:
+			color 0.2s ease,
+			background-color 0.2s ease;
 		font-size: 0.875rem;
 	}
 	.desktop-nav a:not(.portfolio-button):hover {
@@ -168,7 +180,8 @@
 		backdrop-filter: blur(10px);
 		border-bottom-color: rgba(255, 255, 255, 0.1);
 	}
-	@media (min-width: 768px) {
+	@media (min-width: 1200px) {
+		/* Увеличил брейкпоинт для лучшего вида */
 		header {
 			padding: 1.5rem 0;
 		}

@@ -8,25 +8,26 @@
 	import { scrollSpy } from '$lib/actions/scrollSpy';
 </script>
 
-<main>
+<main use:scrollSpy>
 	<Hero />
-	<section id="careerpath" class="page-section" use:scrollSpy>
+
+	<section id="careerpath" class="page-section">
 		<CareerPath />
 	</section>
 
-	<section id="keyprojects" class="page-section" use:scrollSpy>
+	<section id="keyprojects" class="page-section">
 		<KeyProjects />
 	</section>
 
-	<section id="myarsenal" class="page-section" use:scrollSpy>
+	<section id="myarsenal" class="page-section">
 		<MyArsenal />
 	</section>
 
-	<section id="about" class="page-section" use:scrollSpy>
+	<section id="about" class="page-section">
 		<About />
 	</section>
 
-	<section id="contacts" class="page-section bg-white/5" use:scrollSpy>
+	<section id="contacts" class="page-section bg-white/5">
 		<Contacts />
 	</section>
 </main>

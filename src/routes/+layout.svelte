@@ -12,10 +12,52 @@
 	import { fade } from 'svelte/transition';
 	import { isCursorVisible } from '$lib/stores/cursor';
 	import { isLoading } from '$lib/stores/loader';
+	import * as m from '$lib/paraglide/messages';
 
 	let { children } = $props();
 	let scrollY = $state(0);
 	const isScrolled = $derived(scrollY > 10);
+
+	// --- ИСПРАВЛЕННЫЙ КОД: Динамический заголовок ---
+	let title = $state('');
+	const baseTitle = 'Yaroslav Kreo';
+
+	// Этот $effect будет автоматически перезапускаться при изменении $page или $activeSection
+	$effect(() => {
+		const pathname = $page.url.pathname;
+
+		// Сбрасываем активную секцию, если мы ушли с главной страницы
+		if (pathname !== '/') {
+			activeSection.set(null);
+		}
+
+		if (pathname === '/') {
+			switch ($activeSection) {
+				case 'careerpath':
+					title = `${m.career_path_title()} | ${baseTitle}`;
+					break;
+				case 'keyprojects':
+					title = `${m.key_projects_title()} | ${baseTitle}`;
+					break;
+				case 'myarsenal':
+					title = `${m.arsenal_title()} | ${baseTitle}`;
+					break;
+				case 'about':
+					title = `${m.menu_about()} | ${baseTitle}`;
+					break;
+				case 'contacts':
+					title = `${m.menu_contacts()} | ${baseTitle}`;
+					break;
+				default:
+					title = `${baseTitle} | Creative Strategist & Motion Designer`;
+			}
+		} else if (pathname.startsWith('/works')) {
+			title = `${m.menu_portfolio()} | ${baseTitle}`;
+		} else {
+			title = baseTitle;
+		}
+	});
+	// --- КОНЕЦ ИСПРАВЛЕННОГО КОДА ---
 
 	onMount(() => {
 		scrollY = window.scrollY;
@@ -24,11 +66,6 @@
 		};
 		window.addEventListener('scroll', handleScroll, { passive: true });
 		return () => window.removeEventListener('scroll', handleScroll);
-	});
-	$effect(() => {
-		if ($page.url.pathname !== '/') {
-			activeSection.set(null);
-		}
 	});
 
 	$effect(() => {
@@ -41,6 +78,10 @@
 		}
 	});
 </script>
+
+<svelte:head>
+	<title>{title}</title>
+</svelte:head>
 
 {#if $isLoading}
 	<Preloader />

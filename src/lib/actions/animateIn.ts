@@ -1,61 +1,49 @@
-// src/lib/actions/animateIn.ts
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { browser } from '$app/environment';
-import { activeSection } from '$lib/stores/activeSection';
+import type { Action, ActionReturn } from 'svelte/action';
 
-// Регистрируем плагин ScrollTrigger, если мы в браузере
-if (browser) {
-	gsap.registerPlugin(ScrollTrigger);
-}
+type AnimateInParams = {
+	delay?: number;
+	duration?: number;
+	y?: number;
+	visible?: boolean;
+};
 
-interface AnimateInOptions {
-	from?: gsap.TweenVars;
-	to?: gsap.TweenVars;
-}
+export const animateIn: Action<HTMLElement, AnimateInParams | undefined> = (node, params) => {
+	let actionInstance: ActionReturn<AnimateInParams | undefined>;
 
-export function animateIn(node: HTMLElement, options?: AnimateInOptions) {
-	// Параметры анимации по умолчанию
-	const from: gsap.TweenVars = options?.from ?? { y: 30, opacity: 0 };
-	const to: gsap.TweenVars = options?.to ?? {
-		y: 0,
-		opacity: 1,
-		duration: 0.8,
-		ease: 'power3.out'
-	};
+	if (!browser) {
+		return {
+			update: () => {},
+			destroy: () => {}
+		};
+	}
 
-	// Создаем анимацию, которая сработает, когда элемент появится в поле зрения
-	gsap.fromTo(node, from, {
-		...to,
-		scrollTrigger: {
-			trigger: node,
-			start: 'top 90%', // Анимация начнется, когда верх элемента достигнет 90% высоты экрана
-			toggleActions: 'play none none none' // Проиграть один раз и больше не повторять
-		}
-	});
-}
-export function scrollSpy(node: HTMLElement) {
-	if (!browser) return;
-
-	// IntersectionObserver - это API браузера для отслеживания видимости элементов
-	const observer = new IntersectionObserver(
-		(entries) => {
-			const entry = entries[0];
-			if (entry.isIntersecting) {
-				// Когда секция становится видимой, обновляем наше хранилище ее id
-				activeSection.set(node.id);
+	// Динамически импортируем модуль и указываем его точный тип
+	const promise = import('./animateIn.client').then(
+		(module: {
+			default: (
+				node: HTMLElement,
+				params: AnimateInParams | undefined
+			) => ActionReturn<AnimateInParams | undefined>;
+		}) => {
+			if (node) {
+				actionInstance = module.default(node, params);
 			}
-		},
-		{
-			rootMargin: '-50% 0px -50% 0px' // Секция считается активной, когда она находится в центре экрана
 		}
 	);
 
-	observer.observe(node);
-
 	return {
+		update(newParams) {
+			promise.then(() => {
+				actionInstance?.update?.(newParams);
+			});
+		},
 		destroy() {
-			observer.unobserve(node);
+			promise.then(() => {
+				actionInstance?.destroy?.();
+			});
 		}
 	};
-}
+};
+
+export default animateIn;
