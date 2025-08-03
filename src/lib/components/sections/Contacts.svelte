@@ -4,13 +4,15 @@
 	import { Mail, Send, Linkedin } from 'lucide-svelte';
 </script>
 
-<div class="container">
-	<h2 class="section-title" use:animateIn>{m.menu_contacts()}</h2>
-	<p class="subtitle" use:animateIn={{ from: { y: 30, opacity: 0, delay: 0.1 } }}>
+<div class="container" use:animateIn={{ y: 50 }}>
+	<h2 class="section-title">
+		<span class="glow-text">{m.menu_contacts()}</span>
+	</h2>
+	<p class="subtitle">
 		{@html m.contacts_subtitle()}
 	</p>
-	<div class="contact-links" use:animateIn={{ from: { y: 30, opacity: 0, delay: 0.2 } }}>
-		<a href="yarsam.work@gmail.com" class="contact-link" data-cursor-hover>
+	<div class="contact-links">
+		<a href="mailto:yarsam.work@gmail.com" class="contact-link" data-cursor-hover>
 			<Mail size={24} />
 			<span>Email</span>
 		</a>
@@ -18,7 +20,12 @@
 			<Send size={24} />
 			<span>Telegram</span>
 		</a>
-		<a href="https://www.linkedin.com/in/converticube" target="_blank" class="contact-link" data-cursor-hover>
+		<a
+			href="https://www.linkedin.com/in/converticube"
+			target="_blank"
+			class="contact-link"
+			data-cursor-hover
+		>
 			<Linkedin size={24} />
 			<span>LinkedIn</span>
 		</a>
@@ -29,7 +36,7 @@
 	.container {
 		max-width: 1000px;
 		margin: 0 auto;
-		padding: 0 2rem;
+		padding: 5rem 2rem; /* Добавляем отступы секции */
 		text-align: center;
 	}
 	.section-title {
@@ -49,22 +56,29 @@
 		flex-wrap: wrap;
 		gap: 1.5rem;
 	}
+
 	.contact-link {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.75rem;
-		padding: 0.75rem 1.5rem;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		background-color: transparent;
-		color: var(--color-text);
-		border-radius: 9999px;
 		text-decoration: none;
-		transition: all 0.2s ease;
+		border-radius: 9999px;
+
+		/* Используем стили из глобального класса .button */
+		padding: 12px 24px;
+		border: 1px solid var(--light-gray);
+		background: linear-gradient(145deg, var(--dark-gray), #111);
+		color: var(--white);
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease;
 	}
+
 	.contact-link:hover {
-		background-color: var(--color-accent);
-		color: var(--color-background);
-		border-color: var(--color-accent);
-		transform: translateY(-2px);
+		transform: translateY(-2px) scale(1.05);
+		box-shadow:
+			0 4px 15px rgba(0, 0, 0, 0.3),
+			0 0 15px var(--yellow-glow);
 	}
 </style>

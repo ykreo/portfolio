@@ -4,7 +4,6 @@
 	import { animateIn } from '$lib/actions/animateIn';
 	import { scrollSpy } from '$lib/actions/scrollSpy';
 
-	// Отслеживаем, какая карточка открыта (0 для первой, 1 для второй)
 	const expandedCase = writable<number | null>(null);
 
 	function toggleCase(index: number) {
@@ -40,10 +39,7 @@
 		</h2>
 		<div class="cases-wrapper">
 			{#each cases as caseItem, index}
-				<div
-					class="case-card"
-					use:animateIn={{ from: { y: 50, opacity: 0, delay: 0.2 * index } }}
-				>
+				<div class="case-card" use:animateIn={{ y: 50, delay: 0.2 * index }}>
 					<button class="case-header" on:click={() => toggleCase(index)} data-cursor-hover>
 						<h3>{@html caseItem.title()}</h3>
 						<div class="expand-icon" class:expanded={$expandedCase === index}></div>
@@ -51,14 +47,6 @@
 
 					{#if $expandedCase === index}
 						<div class="case-body">
-							<div class="visual-placeholder">
-								{#if index === 0}
-									<p>Здесь будет видео-фрагмент</p>
-								{:else}
-									<p>Здесь будет анимированная инфографика</p>
-								{/if}
-							</div>
-
 							<div class="text-content">
 								<h4>{caseItem.problemTitle()}</h4>
 								<p>{@html caseItem.problemText()}</p>
@@ -80,7 +68,6 @@
 <style>
 	section {
 		padding: 5rem 0;
-		background-color: var(--color-background-secondary);
 	}
 	.container {
 		max-width: 900px;
@@ -99,11 +86,17 @@
 		gap: 2rem;
 	}
 	.case-card {
-		background-color: var(--color-background);
-		border-radius: 1rem;
-		border: 1px solid var(--color-border);
+		background-color: var(--dark-gray);
+		border: 1px solid var(--light-gray);
+		border-radius: var(--border-radius);
 		overflow: hidden;
-		transition: all 0.3s ease;
+		transition:
+			border-color 0.3s ease,
+			box-shadow 0.3s ease;
+	}
+	.case-card:hover {
+		border-color: var(--yellow);
+		box-shadow: 0 0 20px var(--yellow-glow);
 	}
 	.case-header {
 		display: flex;
@@ -114,16 +107,24 @@
 		text-align: left;
 		background: none;
 		border: none;
+		color: inherit;
+		font: inherit;
 	}
 	.case-header h3 {
+		font-family: var(--font-display);
 		font-size: 1.5rem;
 		font-weight: 600;
 		margin: 0;
+		line-height: 1.2;
 	}
 	.expand-icon {
-		width: 24px;
-		height: 24px;
+		width: 28px;
+		height: 28px;
 		position: relative;
+		flex-shrink: 0;
+		margin-left: 1rem;
+		background-color: var(--light-gray);
+		border-radius: 50%;
 	}
 	.expand-icon::before,
 	.expand-icon::after {
@@ -131,10 +132,14 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 16px;
+		width: 14px;
 		height: 2px;
-		background-color: var(--color-text);
+		background-color: var(--white);
 		transition: transform 0.3s ease;
+		transform-origin: center;
+	}
+	.expand-icon::before {
+		transform: translate(-50%, -50%) rotate(0deg);
 	}
 	.expand-icon::after {
 		transform: translate(-50%, -50%) rotate(90deg);
@@ -145,26 +150,20 @@
 	.case-body {
 		padding: 0 1.5rem 1.5rem 1.5rem;
 	}
-	.visual-placeholder {
-		width: 100%;
-		height: 200px;
-		background-color: var(--color-background-secondary);
-		border-radius: 0.5rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-bottom: 1.5rem;
-		border: 1px dashed var(--color-border);
-	}
 	.text-content h4 {
+		font-family: var(--font-display);
 		font-size: 1.1rem;
 		font-weight: 600;
 		margin-top: 1.5rem;
 		margin-bottom: 0.5rem;
+		color: var(--yellow);
 	}
 	.text-content p {
 		line-height: 1.7;
 		opacity: 0.9;
 		margin: 0;
+	}
+	.text-content p:not(:last-child) {
+		margin-bottom: 1.5rem;
 	}
 </style>
