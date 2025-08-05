@@ -33,7 +33,7 @@
 	@keyframes breathe {
 		0%,
 		100% {
-			opacity: 0.7;
+			opacity: 0.5;
 		}
 		50% {
 			opacity: 1;

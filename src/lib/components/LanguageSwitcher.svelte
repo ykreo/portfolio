@@ -1,5 +1,4 @@
 <script lang="ts">
-	// ИСПРАВЛЕНИЕ: Используем `locales`, `setLocale` и `getLocale`
 	import { locales, setLocale, getLocale } from '$lib/paraglide/runtime';
 
 	let activeLang = $state(getLocale());

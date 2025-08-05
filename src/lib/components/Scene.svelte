@@ -21,8 +21,13 @@
 		if (!browser) return;
 
 		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
-		camera.position.z = 5;
+		const camera = new THREE.PerspectiveCamera(
+			90,
+			window.innerWidth / window.innerHeight,
+			0.1,
+			100
+		);
+		camera.position.z = 1;
 
 		const renderer = new THREE.WebGLRenderer({
 			canvas: canvasEl,
@@ -61,7 +66,7 @@
 		const particles = new THREE.Points(particlesGeometry, particlesMaterial);
 		particles.rotation.x = -Math.PI / 4;
 		scene.add(particles);
-		
+
 		const clock = new THREE.Clock();
 
 		const animate = () => {
@@ -70,7 +75,7 @@
 			const elapsedTime = clock.getElapsedTime();
 			uniforms.u_time.value = elapsedTime;
 			particles.rotation.y = scrollY * 0.0005;
-			particles.position.z = -scrollY * 0.005;
+			particles.position.z = -scrollY * 0.0005;
 
 			camera.position.x += (mousePosition.x * 0.5 - camera.position.x) * 0.02;
 			camera.position.y += (-mousePosition.y * 0.5 - camera.position.y) * 0.02;
@@ -78,11 +83,15 @@
 
 			renderer.render(scene, camera);
 		};
-		
+
 		animate(); // 👈 Запускаем анимацию в первый раз
 
-		const handleResize = () => { /* ... без изменений ... */ };
-		const handleMouseMove = (event: MouseEvent) => { /* ... без изменений ... */ };
+		const handleResize = () => {
+			/* ... без изменений ... */
+		};
+		const handleMouseMove = (event: MouseEvent) => {
+			/* ... без изменений ... */
+		};
 
 		// 👇 Логика для остановки/возобновления анимации
 		const handleVisibilityChange = () => {

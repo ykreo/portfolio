@@ -32,7 +32,7 @@
 	];
 </script>
 
-<section id="cases" use:scrollSpy>
+<section id="keyprojects" use:scrollSpy>
 	<div class="container">
 		<h2 class="section-title" use:animateIn>
 			{@html m.key_projects_title()}

@@ -1,36 +1,39 @@
 <script lang="ts">
 	import * as m from '$lib/paraglide/messages';
 	import { animateIn } from '$lib/actions/animateIn';
+	import { scrollSpy } from '$lib/actions/scrollSpy';
 	import { Mail, Send, Linkedin } from 'lucide-svelte';
 </script>
 
-<div class="container" use:animateIn={{ y: 50 }}>
-	<h2 class="section-title">
-		<span class="glow-text">{m.menu_contacts()}</span>
-	</h2>
-	<p class="subtitle">
-		{@html m.contacts_subtitle()}
-	</p>
-	<div class="contact-links">
-		<a href="mailto:yarsam.work@gmail.com" class="contact-link" data-cursor-hover>
-			<Mail size={24} />
-			<span>Email</span>
-		</a>
-		<a href="https://t.me/ykreo" target="_blank" class="contact-link" data-cursor-hover>
-			<Send size={24} />
-			<span>Telegram</span>
-		</a>
-		<a
-			href="https://www.linkedin.com/in/converticube"
-			target="_blank"
-			class="contact-link"
-			data-cursor-hover
-		>
-			<Linkedin size={24} />
-			<span>LinkedIn</span>
-		</a>
+<section id="contacts" use:scrollSpy>
+	<div class="container" use:animateIn={{ y: 50 }}>
+		<h2 class="section-title">
+			{m.menu_contacts()}
+		</h2>
+		<p class="subtitle">
+			{@html m.contacts_subtitle()}
+		</p>
+		<div class="contact-links">
+			<a href="mailto:yarsam.work@gmail.com" class="contact-link" data-cursor-hover>
+				<Mail size={24} />
+				<span>Email</span>
+			</a>
+			<a href="https://t.me/ykreo" target="_blank" class="contact-link" data-cursor-hover>
+				<Send size={24} />
+				<span>Telegram</span>
+			</a>
+			<a
+				href="https://www.linkedin.com/in/converticube"
+				target="_blank"
+				class="contact-link"
+				data-cursor-hover
+			>
+				<Linkedin size={24} />
+				<span>LinkedIn</span>
+			</a>
+		</div>
 	</div>
-</div>
+</section>
 
 <style>
 	.container {

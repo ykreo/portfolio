@@ -20,7 +20,7 @@
 
 	// --- ИСПРАВЛЕННЫЙ КОД: Динамический заголовок ---
 	let title = $state('');
-	const baseTitle = 'Yaroslav Kreo';
+	const baseTitle = 'YKREO';
 
 	// Этот $effect будет автоматически перезапускаться при изменении $page или $activeSection
 	$effect(() => {
@@ -33,6 +33,9 @@
 
 		if (pathname === '/') {
 			switch ($activeSection) {
+				case 'about':
+					title = `${m.menu_about()} | ${baseTitle}`;
+					break;
 				case 'careerpath':
 					title = `${m.career_path_title()} | ${baseTitle}`;
 					break;
@@ -42,14 +45,11 @@
 				case 'myarsenal':
 					title = `${m.arsenal_title()} | ${baseTitle}`;
 					break;
-				case 'about':
-					title = `${m.menu_about()} | ${baseTitle}`;
-					break;
 				case 'contacts':
 					title = `${m.menu_contacts()} | ${baseTitle}`;
 					break;
 				default:
-					title = `${baseTitle} | Creative Strategist & Motion Designer`;
+					title = `${baseTitle}`;
 			}
 		} else if (pathname.startsWith('/works')) {
 			title = `${m.menu_portfolio()} | ${baseTitle}`;

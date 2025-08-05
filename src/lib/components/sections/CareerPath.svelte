@@ -70,7 +70,7 @@
 	});
 </script>
 
-<section id="career" use:scrollSpy>
+<section id="careerpath" use:scrollSpy>
 	<div class="container">
 		<h2 class="section-title">
 			{@html m.career_path_title()}

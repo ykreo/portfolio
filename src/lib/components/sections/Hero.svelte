@@ -21,15 +21,15 @@
 				.hero_title_new()
 				.replace('Senior Motion Designer', '<span class="glow-text">Senior Motion Designer</span>')}
 		</h1>
-		<p class="subtitle" use:animateIn={{ y: 30, opacity: 0, delay: 0.2 }}>
+		<p class="subtitle" use:animateIn={{ y: 30, delay: 0.2 }}>
 			{@html m.hero_subtitle_new()}
 		</p>
-		<div class="achievement" use:animateIn={{ y: 30, opacity: 0, delay: 0.3 }}>
+		<div class="achievement" use:animateIn={{ y: 30, delay: 0.3 }}>
 			{@html m.hero_achievement()}
 		</div>
 		<button
 			class="cta-button"
-			use:animateIn={{ y: 30, opacity: 0, delay: 0.4 }}
+			use:animateIn={{ y: 30, delay: 0.4 }}
 			on:click={scrollToNextSection}
 			data-cursor-hover
 		>

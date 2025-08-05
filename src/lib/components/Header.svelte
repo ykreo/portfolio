@@ -21,10 +21,10 @@
 
 	// --- НОВЫЙ КОД: Список ссылок для меню ---
 	const navLinks = [
+		{ href: '/#about', label: m.menu_about, id: 'about' },
 		{ href: '/#careerpath', label: m.career_path_title, id: 'careerpath' },
 		{ href: '/#keyprojects', label: m.key_projects_title, id: 'keyprojects' },
 		{ href: '/#myarsenal', label: m.arsenal_title, id: 'myarsenal' },
-		{ href: '/#about', label: m.menu_about, id: 'about' },
 		{ href: '/#contacts', label: m.menu_contacts, id: 'contacts' }
 	];
 	// --- КОНЕЦ НОВОГО КОДА ---

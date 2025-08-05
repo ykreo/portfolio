@@ -11,6 +11,10 @@
 <main use:scrollSpy>
 	<Hero />
 
+	<section id="about" class="page-section">
+		<About />
+	</section>
+
 	<section id="careerpath" class="page-section">
 		<CareerPath />
 	</section>
@@ -23,11 +27,7 @@
 		<MyArsenal />
 	</section>
 
-	<section id="about" class="page-section">
-		<About />
-	</section>
-
-	<section id="contacts" class="page-section bg-white/5">
+	<section id="contacts" class="page-section">
 		<Contacts />
 	</section>
 </main>

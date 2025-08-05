@@ -32,6 +32,11 @@
 			title: 'Технологии и AI',
 			icon: Bot,
 			skills: [{ name: m.arsenal_skill2_name, description: m.arsenal_skill2_desc }]
+		},
+		{
+			title: 'Технологии и AI',
+			icon: Bot,
+			skills: [{ name: m.arsenal_skill2_name, description: m.arsenal_skill2_desc }]
 		}
 	];
 
@@ -52,7 +57,7 @@
 	});
 </script>
 
-<section id="arsenal" use:scrollSpy>
+<section id="myarsenal" use:scrollSpy>
 	<div class="container">
 		<h2 class="section-title" use:animateIn>
 			{@html m.arsenal_title()}
@@ -103,7 +108,7 @@
 	}
 	.categories-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 		gap: 2rem;
 	}
 	.category-card {
